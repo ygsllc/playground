@@ -12,6 +12,8 @@ export interface BackendChatResponse {
   conversation_id?: string
   response?: string
   answer?: string
+  output?: string
+  reply?: string
   context?: string[]
 }
 

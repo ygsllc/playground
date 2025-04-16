@@ -19,7 +19,6 @@ import { ChatInput } from './ChatInput'
 import { useChatContext } from '../context/ChatContext'
 import { ErrorBoundary } from 'react-error-boundary'
 import { format } from 'date-fns'
-import { BackendStatus } from './BackendStatus'
 
 function ErrorFallback({ error, resetErrorBoundary }: any) {
   return (
@@ -110,7 +109,14 @@ export const ChatInterface: React.FC = () => {
           justifyContent="space-between"
         >
           <Heading size="md" color="blue.600">RAG Chat Assistant</Heading>
-          <BackendStatus />
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={clearChat}
+            isDisabled={isLoading || messages.length === 0}
+          >
+            Clear Chat
+          </Button>
         </Flex>
 
         <Flex
@@ -131,9 +137,10 @@ export const ChatInterface: React.FC = () => {
               p={8}
             >
               <VStack spacing={4}>
-                <Heading size="lg" color="blue.600">Welcome to ChatBot Testing</Heading>
+                <Heading size="lg" color="blue.600">Welcome to RAG Chat!</Heading>
                 <Text color="gray.600" maxW="md">
-                  I'm your AI assistant powered by....magic
+                  I'm your AI assistant powered by RAG (Retrieval Augmented Generation).
+                  Ask me anything and I'll help you find the information you need.
                 </Text>
               </VStack>
             </Flex>

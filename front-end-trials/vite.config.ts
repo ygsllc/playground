@@ -8,9 +8,19 @@ export default defineConfig({
     port: 5174,
     proxy: {
       '/api': {
-        target: 'https://rag-backend-oa0u.onrender.com',
+        target: 'http://10.0.0.30:5678',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: (path) => path.replace(/^\/api/, '/webhook/chat-api'),
+        configure: (proxy, options) => {
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            if (req.method === 'OPTIONS') {
+              proxyReq.method = 'OPTIONS';
+              res.statusCode = 200;
+            } else {
+              proxyReq.method = 'POST';
+            }
+          });
+        }
       }
     },
     headers: {
@@ -24,7 +34,7 @@ export default defineConfig({
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com;
         img-src 'self' data: https:;
-        connect-src 'self' ws: http://localhost:* https://rag-backend-oa0u.onrender.com;
+        connect-src 'self' ws: http://localhost:* http://10.0.0.30:5678;
       `.replace(/\s+/g, ' ').trim()
     }
   },
@@ -38,4 +48,4 @@ export default defineConfig({
       },
     },
   },
-}) 
+})

@@ -11,7 +11,7 @@ import {
   Box,
   Progress,
 } from '@chakra-ui/react'
-import { FiTrash2 } from 'react-icons/fi'
+import { FiSend, FiTrash2 } from 'react-icons/fi'
 
 interface ChatInputProps {
   onSend: (message: string) => Promise<void>
@@ -66,6 +66,12 @@ export function ChatInput({ onSend, onClear, isLoading }: ChatInputProps) {
   const progress = characterCount / MAX_LENGTH
   const showWarning = progress >= WARNING_THRESHOLD && !isOverLimit
 
+  const getProgressColor = () => {
+    if (isOverLimit) return errorColor
+    if (showWarning) return warningColor
+    return progressColor
+  }
+
   return (
     <Box borderTopWidth="1px" borderColor={borderColor} bg={bgColor}>
       <Box px={4} py={2}>
@@ -97,18 +103,15 @@ export function ChatInput({ onSend, onClear, isLoading }: ChatInputProps) {
             {characterCount}/{MAX_LENGTH}
           </Text>
           <Tooltip label="Send message">
-            <Button
+            <IconButton
               aria-label="Send message"
+              icon={<FiSend />}
               colorScheme="blue"
               onClick={handleSend}
               isLoading={isLoading}
               isDisabled={isOverLimit || !input.trim()}
               size="lg"
-              px={6}
-              fontWeight="bold"
-            >
-              Send
-            </Button>
+            />
           </Tooltip>
           <Tooltip label="Clear chat">
             <IconButton
