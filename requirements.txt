@@ -2,3 +2,4 @@ langchain-core>=0.3.49
 langchain-openai>=0.0.2
 python-dotenv>=1.0.1
 playwright>=1.49.0
+crewai>=0.16.0
