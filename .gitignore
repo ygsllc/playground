@@ -39,3 +39,5 @@ my-browser-use/venv/
 .venv/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime.1.21.1.dylib
 .venv/lib/python3.12/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.so
 .venv/lib/python3.12/site-packages/playwright/driver/node
+
+Scrapper/venv/
