@@ -1,0 +1,25 @@
+{
+  "bank": "Wells Fargo",
+  "url": "https://www.wellsfargo.com/mortgage/rates/",
+  "requires_form": true,
+  "form_fields": {
+    "zip": "75013",
+    "loan_amount": "500000",
+    "property_value": "625000",
+    "credit_score": "740"
+  },
+  "form_sequence": [
+    {"action": "wait", "selector": "#zipCode"},
+    {"action": "type", "selector": "#zipCode", "value_key": "zip"},
+    {"action": "type", "selector": "#propertyValue", "value_key": "property_value"},
+    {"action": "type", "selector": "#loanAmount", "value_key": "loan_amount"},
+    {"action": "click", "selector": "#creditScore"},
+    {"action": "click", "selector": "option[value='740-759']"},
+    {"action": "click", "selector": "button[type='submit']"},
+    {"action": "wait", "selector": ".mortgage-rate-table"}
+  ],
+  "scrape": {
+    "rate_selector": ".mortgage-rate-table tr:first-child td:nth-child(2)",
+    "apr_selector": ".mortgage-rate-table tr:first-child td:nth-child(3)"
+  }
+} 

@@ -1,0 +1,34 @@
+name: Mortgage Rate Scraper Crew
+description: A crew of agents that work together to scrape mortgage rates from various banks
+
+agents:
+  - name: executor
+    role: Mortgage Rate Scraper
+    goal: Accurately scrape mortgage rates from bank websites
+    backstory: I am an automated agent that scrapes mortgage rates from various banks
+    tools:
+      - form
+      - scrape
+      - storage
+
+tasks:
+  - name: scrape_rates
+    description: Scrape mortgage rates from a bank website
+    agent: executor
+    expected_output: Structured mortgage rate data
+    tools_needed:
+      - form
+      - scrape
+      - storage
+
+processes:
+  - name: single_bank_scrape
+    description: Scrape rates from a single bank
+    tasks:
+      - scrape_rates
+    
+  - name: multi_bank_scrape
+    description: Scrape rates from multiple banks in parallel
+    tasks:
+      - scrape_rates
+    parallel: true 
